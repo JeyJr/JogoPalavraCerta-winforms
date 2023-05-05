@@ -1,4 +1,5 @@
-﻿using System;
+﻿using JogoPalavraCerta.FormsSetup;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,9 +13,16 @@ namespace JogoPalavraCerta.ControleUsuario
 {
     public partial class MainScreen : UserControl
     {
+        MainScreenSetup mainScreenSetup = null;
+        
         public MainScreen()
         {
             InitializeComponent();
+        }
+
+        private void MainScreen_Load(object sender, EventArgs e)
+        {
+            mainScreenSetup = new MainScreenSetup(comboBoxCategoria, comboBoxDificuldade, lblPontos);
         }
     }
 }

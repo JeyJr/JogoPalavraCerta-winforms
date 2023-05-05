@@ -162,6 +162,7 @@
             Controls.Add(lblPontos);
             Name = "MainScreen";
             Size = new Size(500, 650);
+            Load += MainScreen_Load;
             ((System.ComponentModel.ISupportInitialize)pictureBoxLogo).EndInit();
             ResumeLayout(false);
         }
