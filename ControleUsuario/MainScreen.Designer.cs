@@ -119,6 +119,7 @@
             btnJogar.TabIndex = 7;
             btnJogar.Text = "Jogar";
             btnJogar.UseVisualStyleBackColor = true;
+            btnJogar.Click += btnJogar_Click;
             // 
             // lblDevByJeyJunior
             // 

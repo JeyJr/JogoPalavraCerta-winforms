@@ -1,10 +1,6 @@
-﻿using JogoPalavraCerta.Setup;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Serialization.Formatters.Binary;
-using System.Text;
-using System.Threading.Tasks;
+﻿using JogoPalavraCerta.Database;
+using JogoPalavraCerta.Setup;
+using System.Data.SqlClient;
 
 namespace JogoPalavraCerta.FormsSetup
 {
@@ -23,14 +19,46 @@ namespace JogoPalavraCerta.FormsSetup
             this.categoria = categoria;
             this.dificuldade = dificuldade;
             this.pontos = pontos;
+            Teste();
 
-
-            tempFolderPath = Path.GetTempPath();
-            tempFilePath = Path.Combine(tempFolderPath, "dataG.txt");
-
-            SetComboBoxValues();
+            //SetFilePath();
+            //SetComboBoxValues();
         }
 
+        //SQL Server
+        private void Teste()
+        {
+            string connString = StringConnection.UserPlayer;
+
+            using(var conn = new SqlConnection(connString))
+            {
+                conn.Open();
+                var sql = "SELECT count(*) FROM carros";
+                
+                using(var cmd = new SqlCommand(sql, conn))
+                {
+                    int result = (int)cmd.ExecuteScalar();
+                    InvokeLabelPontos(result);
+                }
+
+                conn.Close();
+            }
+        }
+        private void InvokeLabelPontos(int result)
+        {
+            pontos.Invoke((MethodInvoker)(() =>
+            {
+                pontos.Text = "Pontos: " + result;
+            }));
+        }
+
+
+        //Database local
+        private void SetFilePath()
+        {
+            tempFolderPath = Path.GetTempPath();
+            tempFilePath = Path.Combine(tempFolderPath, "dataG.txt");
+        }
         private async void SetComboBoxValues()
         {
             await Task.Run(() =>
@@ -40,27 +68,32 @@ namespace JogoPalavraCerta.FormsSetup
                 InvokeLabelPontos();
             });
         }
-
         private void InvokeLabelPontos()
         {
             pontos.Invoke((MethodInvoker)(() =>
             {
-                if (!File.Exists(tempFilePath))
+                try
                 {
-                    using(var write = new StreamWriter(tempFilePath))
+                    if (!File.Exists(tempFilePath))
                     {
-                        write.WriteLine("0");
+                        using (var write = new StreamWriter(tempFilePath))
+                        {
+                            write.WriteLine("0");
+                        }
+                    }
+
+                    using (var read = new StreamReader(tempFilePath))
+                    {
+                        pontos.Text = "Pontos: " + read.ReadLine();
                     }
                 }
-
-                using (var read = new StreamReader(tempFilePath))
+                catch (Exception)
                 {
-                    pontos.Text = "Pontos: " + read.ReadLine();
+                    MessageBox.Show("Arquivo nao encontrado!");
+                    throw;
                 }
-                
             }));
         }
-
         private void InvokeComboBoxCategoria()
         {
             categoria.Invoke((MethodInvoker)(() =>
@@ -81,5 +114,7 @@ namespace JogoPalavraCerta.FormsSetup
                 dificuldade.SelectedIndex = 2;
             }));
         }
+    
+    
     }
 }
