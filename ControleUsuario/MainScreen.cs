@@ -14,10 +14,11 @@ namespace JogoPalavraCerta.ControleUsuario
     public partial class MainScreen : UserControl
     {
         MainScreenSetup mainScreenSetup = null;
-        
+
         public MainScreen()
         {
             InitializeComponent();
+            
         }
 
         private void MainScreen_Load(object sender, EventArgs e)
