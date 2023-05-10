@@ -19,32 +19,56 @@ namespace JogoPalavraCerta.FormsSetup
             this.categoria = categoria;
             this.dificuldade = dificuldade;
             this.pontos = pontos;
-            Teste();
+            SetTextLabelPontos();
 
             //SetFilePath();
             //SetComboBoxValues();
         }
 
         //SQL Server
-        private void Teste()
+        private void SetTextLabelPontos()
         {
             string connString = StringConnection.UserPlayer;
 
-            using(var conn = new SqlConnection(connString))
+            try
             {
-                conn.Open();
-                var sql = "SELECT count(*) FROM carros";
-                
-                using(var cmd = new SqlCommand(sql, conn))
+                using (var conn = new SqlConnection(connString))
                 {
-                    int result = (int)cmd.ExecuteScalar();
-                    InvokeLabelPontos(result);
+                    conn.Open();
+                    var sql = "SELECT TOP 1 animais, carros, motos, frutas FROM PalavraCerta.dbo.pontos;";
+                    using (var cmd = new SqlCommand(sql, conn))
+                    {
+                        SqlDataReader reader = cmd.ExecuteReader();
+                        long maxPoints = GetFromTablePointsAllValues(reader);
+                        InvokeLabelPontos(maxPoints);
+                    }
                 }
-
-                conn.Close();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Ocorreu uma exceção: " + ex.Message);
+                MessageBox.Show("Ocorreu um erro ao recuperar os pontos. Por favor, tente novamente mais tarde.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-        private void InvokeLabelPontos(int result)
+        private long GetFromTablePointsAllValues(SqlDataReader reader)
+        {
+            long maxPoints = 0;
+
+            if (reader.Read())
+            {
+                for (int i = 0; i < reader.FieldCount; i++)
+                {
+                    if (!reader.IsDBNull(i))
+                    {
+                        var value = reader.GetInt64(i);
+                        maxPoints += value;
+                    }
+                }
+            }
+
+            return maxPoints;
+        }
+        private void InvokeLabelPontos(long result)
         {
             pontos.Invoke((MethodInvoker)(() =>
             {
