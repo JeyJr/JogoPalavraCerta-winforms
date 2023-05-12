@@ -13,9 +13,10 @@ namespace JogoPalavraCerta.Forms
         private void CriarMainScreen()
         {
             MainScreen mainScreen = new MainScreen();
+            MatchScreen matchScreen = new MatchScreen();
 
-            this.Size = mainScreen.Size;
-            this.Controls.Add(mainScreen);
+            this.Size = matchScreen.Size;
+            this.Controls.Add(matchScreen);
         }
 
         private void FrmMatch_Load(object sender, EventArgs e)

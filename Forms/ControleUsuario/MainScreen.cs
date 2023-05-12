@@ -1,4 +1,4 @@
-﻿using JogoPalavraCerta.FormsSetup;
+﻿using JogoPalavraCerta.Forms.FormsSetup;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,7 +14,7 @@ namespace JogoPalavraCerta.ControleUsuario
     public partial class MainScreen : UserControl
     {
         MainScreenSetup mainScreenSetup = null;
-        MatchSetup matchSetup = null;
+
 
         public MainScreen()
         {
@@ -29,7 +29,8 @@ namespace JogoPalavraCerta.ControleUsuario
 
         private void btnJogar_Click(object sender, EventArgs e)
         {
-            matchSetup = new MatchSetup(comboBoxCategoria.SelectedIndex, comboBoxDificuldade.SelectedIndex);
+            //Instanciar MatchScreen
+            //matchSetup = new MatchSetup(comboBoxCategoria.SelectedIndex, comboBoxDificuldade.SelectedIndex);
         }
     }
 }

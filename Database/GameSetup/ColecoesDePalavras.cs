@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace JogoPalavraCerta.Setup
+namespace JogoPalavraCerta.Database.GameSetup
 {
     public sealed class ColecoesDePalavras
     {
@@ -14,7 +14,7 @@ namespace JogoPalavraCerta.Setup
 
         }
         public ColecoesDePalavras Instance => instance ??= new ColecoesDePalavras();
-        
+
         string[] animais = new string[] {
     "abelha",
     "água-viva",
@@ -236,7 +236,7 @@ namespace JogoPalavraCerta.Setup
             "China", "Chipre", "Cingapura", "Colômbia", "Comores",
             "Coreia do Norte", "Coreia do Sul", "Costa do Marfim", "Costa Rica", "Croácia",
         };
-    
+
         public string SelecionarPalavra(Categoria categoria)
         {
             var r = new Random();
@@ -260,6 +260,6 @@ namespace JogoPalavraCerta.Setup
             }
 
         }
-        
+
     }
 }
