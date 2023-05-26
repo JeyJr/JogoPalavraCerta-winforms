@@ -1,5 +1,5 @@
 ﻿using JogoPalavraCerta.ControleUsuario;
-
+using System.Diagnostics;
 
 namespace JogoPalavraCerta.Forms
 {
@@ -10,13 +10,19 @@ namespace JogoPalavraCerta.Forms
             InitializeComponent();
         }
 
+        //Refatorar
         private void CriarMainScreen()
         {
-            MainScreen mainScreen = new MainScreen();
-            MatchScreen matchScreen = new MatchScreen();
+            var mainScreen = new MainScreen();
+            var matchScreen = new MatchScreen();
 
-            this.Size = matchScreen.Size;
+
+
+            this.Size = mainScreen.Size;
+            this.Controls.Add(mainScreen);
             this.Controls.Add(matchScreen);
+
+            matchScreen.Visible = false;
         }
 
         private void FrmMatch_Load(object sender, EventArgs e)

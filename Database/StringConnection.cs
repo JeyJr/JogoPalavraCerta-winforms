@@ -10,9 +10,9 @@ namespace JogoPalavraCerta.Database
     public static class StringConnection
     {
         //"Server=myServerAddress;Database=myDataBase;User Id=myUsername;Password=myPassword;"
-        public static string WindowsAuthentication { get; } = "Server=DESKTOP-DHOF7ET\\SQLEXPRESS;Database=PalavraCerta;Trusted_Connection=True;";
-        public static string UserSa { get; } = "Server=DESKTOP-DHOF7ET\\SQLEXPRESS;Database=PalavraCerta;User Id=sa;Password=dbaP#@1990;";
-        public static string UserPlayer { get; } = "Server=DESKTOP-DHOF7ET\\SQLEXPRESS;Database=PalavraCerta;User Id=player;Password=dbaplayer@2023;";
+        public static string WindowsAuthentication { get; } = "Server=JJ\\SQLEXPRESS;Database=PalavraCerta;Trusted_Connection=True;";
+        public static string UserSa { get; } = "Server=JJ\\SQLEXPRESS;Database=PalavraCerta;User Id=sa;Password=dbaP#@1990;";
+        public static string UserPlayer { get; } = "Server=JJ\\SQLEXPRESS;Database=PalavraCerta;User Id=player;Password=dbaplayer@2023;";
     }
 
 }

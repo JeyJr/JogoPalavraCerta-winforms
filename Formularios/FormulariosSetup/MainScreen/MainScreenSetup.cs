@@ -4,7 +4,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Diagnostics;
 
-namespace JogoPalavraCerta.Forms.FormsSetup
+namespace JogoPalavraCerta.Formularios.FormulariosSetup.MainScreen
 {
     //Pontuação e dificuldade controle interno
     //Categoria controle no banco de dados (SQLSERVER)
@@ -13,16 +13,17 @@ namespace JogoPalavraCerta.Forms.FormsSetup
         private ComboBox categoria;
         private ComboBox dificuldade;
         private Label pontos;
-
+        private Button jogar;
 
         string tempFolderPath = "";
         string tempFilePath = "";
 
-        public MainScreenSetup(ComboBox categoria, ComboBox dificuldade, Label pontos)
+        public MainScreenSetup(ComboBox categoria, ComboBox dificuldade, Label pontos, Button jogar)
         {
             this.categoria = categoria;
             this.dificuldade = dificuldade;
             this.pontos = pontos;
+            this.jogar = jogar;
 
             SetFilePath();
             SetValuesToComponentsInUI();
@@ -40,6 +41,15 @@ namespace JogoPalavraCerta.Forms.FormsSetup
                 InvokeComboBoxCategoria();
                 InvokeComboBoxDificuldade();
                 InvokeLabelPontos();
+            }).ContinueWith( t =>
+            {
+                if (t.IsCompleted)
+                {
+                    jogar.Invoke((MethodInvoker)(() =>
+                    {
+                        jogar.Enabled = true;
+                    }));
+                }
             });
         }
 
@@ -90,7 +100,7 @@ namespace JogoPalavraCerta.Forms.FormsSetup
         {
             try
             {
-                using (var conn = new SqlConnection(StringConnection.UserSa))
+                using (var conn = new SqlConnection(StringConnection.UserPlayer))
                 {
                     conn.Open();
 
@@ -111,54 +121,3 @@ namespace JogoPalavraCerta.Forms.FormsSetup
 
     }
 }
-
-
-//private void SetTextLabelPontos()
-//{
-//    string connString = StringConnection.UserPlayer;
-
-//    try
-//    {
-//        using (var conn = new SqlConnection(connString))
-//        {
-//            conn.Open();
-//            var sql = "SELECT TOP 1 animais, carros, motos, frutas FROM PalavraCerta.dbo.pontos;";
-//            using (var cmd = new SqlCommand(sql, conn))
-//            {
-//                SqlDataReader reader = cmd.ExecuteReader();
-//                long maxPoints = GetFromTablePointsAllValues(reader);
-//                InvokeLabelPontos(maxPoints);
-//            }
-//        }
-//    }
-//    catch (Exception ex)
-//    {
-//        Console.WriteLine("Ocorreu uma exceção: " + ex.Message);
-//        MessageBox.Show("Ocorreu um erro ao recuperar os pontos. Por favor, tente novamente mais tarde.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
-//    }
-//}
-//private long GetFromTablePointsAllValues(SqlDataReader reader)
-//{
-//    long maxPoints = 0;
-
-//    if (reader.Read())
-//    {
-//        for (int i = 0; i < reader.FieldCount; i++)
-//        {
-//            if (!reader.IsDBNull(i))
-//            {
-//                var value = reader.GetInt64(i);
-//                maxPoints += value;
-//            }
-//        }
-//    }
-
-//    return maxPoints;
-//}
-//private void InvokeLabelPontos(long result)
-//{
-//    pontos.Invoke((MethodInvoker)(() =>
-//    {
-//        pontos.Text = "Pontos: " + result;
-//    }));
-//}
