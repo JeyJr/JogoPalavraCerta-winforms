@@ -1,4 +1,5 @@
 ﻿using JogoPalavraCerta.Forms.FormsSetup;
+using JogoPalavraCerta.Formularios;
 using JogoPalavraCerta.Formularios.FormulariosSetup.MainScreen;
 using System;
 using System.Collections.Generic;
@@ -29,14 +30,7 @@ namespace JogoPalavraCerta.ControleUsuario
 
         private void btnJogar_Click(object sender, EventArgs e)
         {
-            var matchScreen = this.Controls.OfType<MatchScreen>().FirstOrDefault();
-            var mainScreen = this.Controls.OfType<MainScreen>().FirstOrDefault();
-            
-            if (matchScreen != null && mainScreen != null)
-            {
-                matchScreen.Visible = true;
-                mainScreen.Visible = false;
-            }
+            ControleInterfaces.Instance.EnableMainScreen(false);
         }
 
 
