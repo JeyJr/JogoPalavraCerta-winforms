@@ -7,11 +7,17 @@ using System.Threading.Tasks;
 
 namespace JogoPalavraCerta.Formularios
 {
+    /// <summary>
+    /// Singleton: Controlar mainScreen e matchScreen
+    /// </summary>
     public class ControleInterfaces
     {
         //Fazer a troca das telas ou habilitar e desabilitar a main/match screen
         private MainScreen mainScreen = new MainScreen();
         private MatchScreen matchScreen = new MatchScreen();
+
+        public MainScreen MainScreen { get => mainScreen; }
+        public MatchScreen MatchScreen { get => matchScreen; }
 
         private static ControleInterfaces instance = new ControleInterfaces();
         public static ControleInterfaces Instance = instance ?? new ControleInterfaces();

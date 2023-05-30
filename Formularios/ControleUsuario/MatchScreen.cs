@@ -1,4 +1,5 @@
-﻿using JogoPalavraCerta.Forms.FormsSetup;
+﻿using JogoPalavraCerta.Database;
+using JogoPalavraCerta.Forms.FormsSetup;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -27,6 +28,11 @@ namespace JogoPalavraCerta.ControleUsuario
             {
                 lblLetraSelecionada.Text = btn.Text;
             }
+        }
+
+        private void MatchScreen_VisibleChanged(object sender, EventArgs e)
+        {
+            lblPalavra.Text = PalavraSelecionada.Instance.Palavra;
         }
     }
 }

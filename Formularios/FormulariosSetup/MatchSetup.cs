@@ -14,6 +14,7 @@ namespace JogoPalavraCerta.Forms.FormsSetup
         private readonly UserControl userControl;
         private readonly ICharacterClickHandler characterClickHandler;
 
+
         public MatchSetup(ICharacterClickHandler characterClickHandler, UserControl userControl)
         {
             this.characterClickHandler = characterClickHandler;

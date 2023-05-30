@@ -1,4 +1,5 @@
-﻿using JogoPalavraCerta.Forms.FormsSetup;
+﻿using JogoPalavraCerta.Database;
+using JogoPalavraCerta.Forms.FormsSetup;
 using JogoPalavraCerta.Formularios;
 using JogoPalavraCerta.Formularios.FormulariosSetup.MainScreen;
 using System;
@@ -30,6 +31,13 @@ namespace JogoPalavraCerta.ControleUsuario
 
         private void btnJogar_Click(object sender, EventArgs e)
         {
+            //Capturar o objeto selecionado em categoria e dificuldade
+            //Vai acessar o banco onde possui a tabela selecionada e ira sortear uma unica palavra desse db
+            string tableName = ControleInterfaces.Instance.MainScreen.comboBoxCategoria.SelectedItem.ToString();
+            string palavra = EscolherPalavraSQL.SelecionarPalavra(tableName);
+            
+            PalavraSelecionada.Instance.Palavra = palavra;
+            
             ControleInterfaces.Instance.EnableMainScreen(false);
         }
 

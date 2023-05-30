@@ -114,6 +114,7 @@
             Margin = new Padding(3, 4, 3, 4);
             Name = "MatchScreen";
             Size = new Size(530, 650);
+            VisibleChanged += MatchScreen_VisibleChanged;
             ResumeLayout(false);
             PerformLayout();
         }
