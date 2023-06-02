@@ -1,5 +1,5 @@
 ﻿using JogoPalavraCerta.Database;
-using JogoPalavraCerta.Forms.FormsSetup;
+using JogoPalavraCerta.Formularios.FormulariosSetup.MatchSetup;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,9 +13,9 @@ namespace JogoPalavraCerta.ControleUsuario
 {
     public partial class MatchScreen : UserControl, ICharacterClickHandler
     {
-        MatchSetup matchSetup;
-        string palavra = "";
-        string textLabelInicial = "_";
+        readonly MatchSetup matchSetup;
+        private Button btnSelected;
+
 
         public MatchScreen()
         {
@@ -29,48 +29,37 @@ namespace JogoPalavraCerta.ControleUsuario
             if (sender is Button btn)
             {
                 lblLetraSelecionada.Text = btn.Text;
-                CheckIfWordHasCharSelected(lblLetraSelecionada.Text[0], btn);
+                btnSelected = btn;
             }
-        }
-
-        private void CheckIfWordHasCharSelected(char letra, Button btn)
-        {
-            
-            if (!palavra.Any(c => c == letra))
-            {
-                //PERDER PONTO 
-                return;
-            }
-            ShowCharInWord(letra);
-            btn.Enabled = false;
-
-        }
-
-        private void ShowCharInWord(char letra)
-        {
-            StringBuilder builder = new StringBuilder(textLabelInicial);
-            for (int i = 0; i < palavra.Length; i++)
-            {
-                if(letra == palavra[i])
-                {
-                    builder[i] = letra;
-                }
-            }
-
-            textLabelInicial = builder.ToString();
-            lblPalavra.Text = textLabelInicial;
         }
 
         private void MatchScreen_VisibleChanged(object sender, EventArgs e)
         {
-            palavra = PalavraSelecionada.Instance.Palavra.ToUpper();
+            var novaPalavra = PalavraSelecionada.Instance.Palavra.ToUpper();
+            PalavraDaPartida.Instance.DefinirPalavraDaPartidaAtual(novaPalavra);
+
             lblPalavra.Text = "";
-            foreach (char letra in palavra)
+
+            string novoTexto = ValidarLetra.Instance.
+                DefinirTamanhoDoTextoDaLabelPalavra(novaPalavra.Length);
+
+            lblPalavra.Text = novoTexto;
+        }
+
+        private void btnConfirmarLetra_Click(object sender, EventArgs e)
+        {
+            btnSelected.Enabled = false;
+            char letra = btnSelected.Text[0];
+
+            if (!ValidarLetra.Instance.ValidarLetraSelecionada(letra))
             {
-                lblPalavra.Text += "_";
+                //PERDE VIDA E CHANCE
+                return;
             }
 
-            textLabelInicial = lblPalavra.Text;
+            //GANHA PONTO
+            lblPalavra.Text = ValidarLetra.Instance.ExibirLetraNaPalavra(letra);
         }
+
     }
 }

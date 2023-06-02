@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace JogoPalavraCerta.Forms.FormsSetup
+namespace JogoPalavraCerta.Formularios.FormulariosSetup.MatchSetup
 {
     public interface ICharacterClickHandler
     {

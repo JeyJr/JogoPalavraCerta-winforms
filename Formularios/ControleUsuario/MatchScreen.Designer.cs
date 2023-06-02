@@ -30,7 +30,6 @@
         {
             lblTentativas = new Label();
             progressBarTentativas = new ProgressBar();
-            lblLetrasUtilizadas = new Label();
             lblPalavra = new Label();
             btnConfirmarLetra = new Button();
             lblLetraSelecionada = new Label();
@@ -54,42 +53,36 @@
             progressBarTentativas.Size = new Size(379, 13);
             progressBarTentativas.TabIndex = 1;
             // 
-            // lblLetrasUtilizadas
-            // 
-            lblLetrasUtilizadas.AutoSize = true;
-            lblLetrasUtilizadas.Location = new Point(210, 165);
-            lblLetrasUtilizadas.Name = "lblLetrasUtilizadas";
-            lblLetrasUtilizadas.Size = new Size(85, 20);
-            lblLetrasUtilizadas.TabIndex = 2;
-            lblLetrasUtilizadas.Text = "A B C D E ...";
-            // 
             // lblPalavra
             // 
-            lblPalavra.AutoSize = true;
-            lblPalavra.Location = new Point(223, 267);
+            lblPalavra.Font = new Font("Segoe UI", 20F, FontStyle.Bold, GraphicsUnit.Point);
+            lblPalavra.Location = new Point(0, 188);
             lblPalavra.Name = "lblPalavra";
-            lblPalavra.Size = new Size(70, 20);
+            lblPalavra.Size = new Size(530, 109);
             lblPalavra.TabIndex = 3;
-            lblPalavra.Text = "PALAVRA";
+            lblPalavra.Text = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+            lblPalavra.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // btnConfirmarLetra
             // 
-            btnConfirmarLetra.Location = new Point(160, 456);
+            btnConfirmarLetra.Location = new Point(164, 488);
             btnConfirmarLetra.Margin = new Padding(3, 4, 3, 4);
             btnConfirmarLetra.Name = "btnConfirmarLetra";
             btnConfirmarLetra.Size = new Size(198, 43);
             btnConfirmarLetra.TabIndex = 5;
             btnConfirmarLetra.Text = "Confirmar";
             btnConfirmarLetra.UseVisualStyleBackColor = true;
+            btnConfirmarLetra.Click += btnConfirmarLetra_Click;
             // 
             // lblLetraSelecionada
             // 
-            lblLetraSelecionada.AutoSize = true;
-            lblLetraSelecionada.Location = new Point(232, 404);
+            lblLetraSelecionada.Font = new Font("Segoe UI", 18F, FontStyle.Bold | FontStyle.Underline, GraphicsUnit.Point);
+            lblLetraSelecionada.Location = new Point(0, 402);
             lblLetraSelecionada.Name = "lblLetraSelecionada";
-            lblLetraSelecionada.Size = new Size(19, 20);
+            lblLetraSelecionada.Size = new Size(530, 55);
             lblLetraSelecionada.TabIndex = 6;
             lblLetraSelecionada.Text = "A";
+            lblLetraSelecionada.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // lblPontos
             // 
@@ -108,7 +101,6 @@
             Controls.Add(lblLetraSelecionada);
             Controls.Add(btnConfirmarLetra);
             Controls.Add(lblPalavra);
-            Controls.Add(lblLetrasUtilizadas);
             Controls.Add(progressBarTentativas);
             Controls.Add(lblTentativas);
             Margin = new Padding(3, 4, 3, 4);
@@ -123,7 +115,6 @@
 
         private Label lblTentativas;
         private ProgressBar progressBarTentativas;
-        private Label lblLetrasUtilizadas;
         private Label lblPalavra;
         private Button btnConfirmarLetra;
         private Label lblLetraSelecionada;

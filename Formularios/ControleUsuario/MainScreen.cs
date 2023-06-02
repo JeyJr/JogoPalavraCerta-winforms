@@ -1,5 +1,4 @@
 ﻿using JogoPalavraCerta.Database;
-using JogoPalavraCerta.Forms.FormsSetup;
 using JogoPalavraCerta.Formularios;
 using JogoPalavraCerta.Formularios.FormulariosSetup.MainScreen;
 using System;
