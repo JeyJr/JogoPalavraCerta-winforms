@@ -1,5 +1,5 @@
-﻿using JogoPalavraCerta.Database;
-using JogoPalavraCerta.Database.GameSetup;
+﻿using JogoPalavraCerta.Database.GameSetup;
+using JogoPalavraCerta.Database.SQL;
 using System.Data;
 using System.Data.SqlClient;
 using System.Diagnostics;

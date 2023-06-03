@@ -1,4 +1,7 @@
-﻿using JogoPalavraCerta.Database;
+﻿using JogoPalavraCerta.Database.GameOver;
+using JogoPalavraCerta.Database.SQL;
+using JogoPalavraCerta.Database.TentativasSetup;
+using JogoPalavraCerta.Formularios;
 using JogoPalavraCerta.Formularios.FormulariosSetup.MatchSetup;
 using System;
 using System.Collections.Generic;
@@ -39,11 +42,16 @@ namespace JogoPalavraCerta.ControleUsuario
             PalavraDaPartida.Instance.DefinirPalavraDaPartidaAtual(novaPalavra);
 
             lblPalavra.Text = "";
+            lblLetraSelecionada.Text = "_";
+            lblTentativas.Text = TentativasControl.Instance.TentativasRestantes +
+                "/" +
+                TentativasControl.Instance.MaxTentativas;
 
             string novoTexto = ValidarLetra.Instance.
                 DefinirTamanhoDoTextoDaLabelPalavra(novaPalavra.Length);
 
             lblPalavra.Text = novoTexto;
+            matchSetup.ResetBtns();
         }
 
         private void btnConfirmarLetra_Click(object sender, EventArgs e)
@@ -53,7 +61,11 @@ namespace JogoPalavraCerta.ControleUsuario
 
             if (!ValidarLetra.Instance.ValidarLetraSelecionada(letra))
             {
-                //PERDE VIDA E CHANCE
+                TentativasControl.Instance.ErrouLetra();
+                //Atualizar tentantivas
+                
+                GameOver.VerificarFimDeJogo();
+
                 return;
             }
 
@@ -61,5 +73,9 @@ namespace JogoPalavraCerta.ControleUsuario
             lblPalavra.Text = ValidarLetra.Instance.ExibirLetraNaPalavra(letra);
         }
 
+        private void btnVoltar_Click(object sender, EventArgs e)
+        {
+            ControleInterfaces.Instance.EnableMainScreen(true);
+        }
     }
 }

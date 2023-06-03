@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace JogoPalavraCerta.Database
+namespace JogoPalavraCerta.Database.SQL
 {
     public static class StringConnection
     {

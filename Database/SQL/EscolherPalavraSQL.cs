@@ -9,13 +9,13 @@ using static System.ComponentModel.Design.ObjectSelectorEditor;
 using static System.Net.Mime.MediaTypeNames;
 using System.Windows.Forms;
 
-namespace JogoPalavraCerta.Database
+namespace JogoPalavraCerta.Database.SQL
 {
     public class EscolherPalavraSQL
     {
         public static string SelecionarPalavra(string tableName)
         {
-            using(SqlConnection  conn = new SqlConnection(StringConnection.UserPlayer))
+            using (SqlConnection conn = new SqlConnection(StringConnection.UserPlayer))
             {
                 try
                 {

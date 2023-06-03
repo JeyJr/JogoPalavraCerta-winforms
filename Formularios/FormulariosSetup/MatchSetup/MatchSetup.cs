@@ -74,6 +74,10 @@ namespace JogoPalavraCerta.Formularios.FormulariosSetup.MatchSetup
             }
         }
 
+        public void ResetBtns()
+        {
+            btns.ForEach(c => c.Enabled = true);
+        }
 
     }
 }
