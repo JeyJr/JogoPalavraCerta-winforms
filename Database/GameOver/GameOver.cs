@@ -1,10 +1,5 @@
 ﻿using JogoPalavraCerta.Database.TentativasSetup;
 using JogoPalavraCerta.Formularios;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace JogoPalavraCerta.Database.GameOver
 {

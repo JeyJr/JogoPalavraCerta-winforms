@@ -118,6 +118,5 @@ namespace JogoPalavraCerta.Formularios.FormulariosSetup.MainScreen
                 MessageBox.Show("Falha ao carregar categorias!");
             }
         }
-
     }
 }

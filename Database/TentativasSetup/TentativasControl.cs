@@ -1,9 +1,5 @@
-﻿using JogoPalavraCerta.Database.GameSetup;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
+using JogoPalavraCerta.Formularios.FormulariosSetup.MatchSetup;
 
 namespace JogoPalavraCerta.Database.TentativasSetup
 {
@@ -31,12 +27,13 @@ namespace JogoPalavraCerta.Database.TentativasSetup
 
         public bool VerificarSeOJogoAcabou()
         {
-            return tentativasRestantes > 0;
+            return tentativasRestantes <= 0;
         }
 
         public void ErrouLetra()
         {
             tentativasRestantes--;
+            LabelControl.Instance.AtualizarTextLblTentativas();
         }
 
     }

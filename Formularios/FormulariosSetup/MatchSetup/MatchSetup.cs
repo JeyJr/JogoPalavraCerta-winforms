@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace JogoPalavraCerta.Formularios.FormulariosSetup.MatchSetup
 {
     public class MatchSetup
@@ -22,7 +17,6 @@ namespace JogoPalavraCerta.Formularios.FormulariosSetup.MatchSetup
 
             SetAlfabetCharacters();
             CreateBtns();
-
         }
 
         private void SetAlfabetCharacters()
@@ -30,7 +24,6 @@ namespace JogoPalavraCerta.Formularios.FormulariosSetup.MatchSetup
             for (int i = 0; i < 26; i++)
                 alfabet[i] = (char)('A' + i);
         }
-
 
         private void CreateBtns()
         {

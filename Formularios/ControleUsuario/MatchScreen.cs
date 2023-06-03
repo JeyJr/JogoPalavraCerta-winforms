@@ -3,14 +3,6 @@ using JogoPalavraCerta.Database.SQL;
 using JogoPalavraCerta.Database.TentativasSetup;
 using JogoPalavraCerta.Formularios;
 using JogoPalavraCerta.Formularios.FormulariosSetup.MatchSetup;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-
 
 namespace JogoPalavraCerta.ControleUsuario
 {
@@ -29,6 +21,8 @@ namespace JogoPalavraCerta.ControleUsuario
 
         public void btnSelectCharacter_Click(object? sender, EventArgs e)
         {
+            btnConfirmarLetra.Enabled = true;
+
             if (sender is Button btn)
             {
                 lblLetraSelecionada.Text = btn.Text;
@@ -38,14 +32,16 @@ namespace JogoPalavraCerta.ControleUsuario
 
         private void MatchScreen_VisibleChanged(object sender, EventArgs e)
         {
+            btnConfirmarLetra.Enabled = false;
+
             var novaPalavra = PalavraSelecionada.Instance.Palavra.ToUpper();
             PalavraDaPartida.Instance.DefinirPalavraDaPartidaAtual(novaPalavra);
 
+            LabelControl.Instance.DefinirLabelTentativa(lblTentativas);
+            LabelControl.Instance.AtualizarTextLblTentativas();
+
             lblPalavra.Text = "";
             lblLetraSelecionada.Text = "_";
-            lblTentativas.Text = TentativasControl.Instance.TentativasRestantes +
-                "/" +
-                TentativasControl.Instance.MaxTentativas;
 
             string novoTexto = ValidarLetra.Instance.
                 DefinirTamanhoDoTextoDaLabelPalavra(novaPalavra.Length);
@@ -57,6 +53,8 @@ namespace JogoPalavraCerta.ControleUsuario
         private void btnConfirmarLetra_Click(object sender, EventArgs e)
         {
             btnSelected.Enabled = false;
+            btnConfirmarLetra.Enabled = false;
+
             char letra = btnSelected.Text[0];
 
             if (!ValidarLetra.Instance.ValidarLetraSelecionada(letra))
@@ -71,6 +69,8 @@ namespace JogoPalavraCerta.ControleUsuario
 
             //GANHA PONTO
             lblPalavra.Text = ValidarLetra.Instance.ExibirLetraNaPalavra(letra);
+            
+            
         }
 
         private void btnVoltar_Click(object sender, EventArgs e)
