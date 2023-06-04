@@ -37,6 +37,7 @@
             ClientSize = new Size(297, 176);
             FormBorderStyle = FormBorderStyle.FixedSingle;
             Margin = new Padding(3, 4, 3, 4);
+            MinimizeBox = false;
             Name = "FrmMatch";
             Text = "FrmMatch";
             Load += FrmMatch_Load;

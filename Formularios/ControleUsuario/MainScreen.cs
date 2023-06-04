@@ -1,4 +1,5 @@
-﻿using JogoPalavraCerta.Database.SQL;
+﻿using JogoPalavraCerta.Database.PointsSetup;
+using JogoPalavraCerta.Database.SQL;
 using JogoPalavraCerta.Database.TentativasSetup;
 using JogoPalavraCerta.Formularios;
 using JogoPalavraCerta.Formularios.FormulariosSetup.MainScreen;
@@ -31,10 +32,16 @@ namespace JogoPalavraCerta.ControleUsuario
             TentativasControl.Instance.DefinirNumeroDeTentativas(indexDificuldade);
 
             PalavraSelecionada.Instance.Palavra = palavra;
-            
+
             ControleInterfaces.Instance.EnableMainScreen(false);
         }
 
-
+        private void MainScreen_VisibleChanged(object sender, EventArgs e)
+        {
+            if (this.Visible)
+            {
+                lblPontos.Text = PointsControl.Instance.ObterPontosArquivosDePontuacao();
+            }
+        }
     }
 }

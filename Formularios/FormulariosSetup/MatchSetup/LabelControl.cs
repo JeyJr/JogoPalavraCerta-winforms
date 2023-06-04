@@ -1,4 +1,5 @@
-﻿using JogoPalavraCerta.Database.TentativasSetup;
+﻿using JogoPalavraCerta.Database.PointsSetup;
+using JogoPalavraCerta.Database.TentativasSetup;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,8 +14,12 @@ namespace JogoPalavraCerta.Formularios.FormulariosSetup.MatchSetup
         private LabelControl() { }
         public static LabelControl Instance => instance ?? new LabelControl();
 
-
+        private Label lblMatchPoints;
         private Label lblTentativas;
+
+        public void DefinirLabelMatchPoints(Label matchPoints)
+            => lblMatchPoints = matchPoints;
+        
         public void DefinirLabelTentativa(Label labelTentativa) 
             => lblTentativas = labelTentativa;
 
@@ -23,6 +28,13 @@ namespace JogoPalavraCerta.Formularios.FormulariosSetup.MatchSetup
             lblTentativas.Text = $"" +
                 $"{TentativasControl.Instance.TentativasRestantes} / " +
                 $"{TentativasControl.Instance.MaxTentativas}";
+        }
+
+        public void AtualizarTextLblMatchPoints()
+        {
+            lblMatchPoints.Text = PointsControl.Instance
+                .ObterPontuacaoDaPartida()
+                .ToString();
         }
 
     }

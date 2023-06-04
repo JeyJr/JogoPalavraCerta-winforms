@@ -1,4 +1,5 @@
 ﻿using JogoPalavraCerta.Database.GameOver;
+using JogoPalavraCerta.Database.PointsSetup;
 using JogoPalavraCerta.Database.SQL;
 using JogoPalavraCerta.Database.TentativasSetup;
 using JogoPalavraCerta.Formularios;
@@ -37,8 +38,12 @@ namespace JogoPalavraCerta.ControleUsuario
             var novaPalavra = PalavraSelecionada.Instance.Palavra.ToUpper();
             PalavraDaPartida.Instance.DefinirPalavraDaPartidaAtual(novaPalavra);
 
+            PointsControl.Instance.IniciarPontuancaoDaPartida();
             LabelControl.Instance.DefinirLabelTentativa(lblTentativas);
+            LabelControl.Instance.DefinirLabelMatchPoints(lblPontos);
+
             LabelControl.Instance.AtualizarTextLblTentativas();
+            LabelControl.Instance.AtualizarTextLblMatchPoints();
 
             lblPalavra.Text = "";
             lblLetraSelecionada.Text = "_";
@@ -67,10 +72,10 @@ namespace JogoPalavraCerta.ControleUsuario
                 return;
             }
 
-            //GANHA PONTO
+            
             lblPalavra.Text = ValidarLetra.Instance.ExibirLetraNaPalavra(letra);
-            
-            
+
+            ValidarLetra.Instance.VerificaSeAcertouAPalavra();
         }
 
         private void btnVoltar_Click(object sender, EventArgs e)

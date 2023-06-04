@@ -1,8 +1,10 @@
 ﻿using JogoPalavraCerta.Database.GameSetup;
+using JogoPalavraCerta.Database.PointsSetup;
 using JogoPalavraCerta.Database.SQL;
 using System.Data;
 using System.Data.SqlClient;
 using System.Diagnostics;
+using System.Reflection;
 
 namespace JogoPalavraCerta.Formularios.FormulariosSetup.MainScreen
 {
@@ -15,9 +17,6 @@ namespace JogoPalavraCerta.Formularios.FormulariosSetup.MainScreen
         private Label pontos;
         private Button jogar;
 
-        string tempFolderPath = "";
-        string tempFilePath = "";
-
         public MainScreenSetup(ComboBox categoria, ComboBox dificuldade, Label pontos, Button jogar)
         {
             this.categoria = categoria;
@@ -25,15 +24,10 @@ namespace JogoPalavraCerta.Formularios.FormulariosSetup.MainScreen
             this.pontos = pontos;
             this.jogar = jogar;
 
-            SetFilePath();
+            PointsControl.Instance.DefinirCaminhoDoArquivoDePontos();
             SetValuesToComponentsInUI();
         }
 
-        private void SetFilePath()
-        {
-            tempFolderPath = Path.GetTempPath();
-            tempFilePath = Path.Combine(tempFolderPath, "dataG.txt");
-        }
         private async void SetValuesToComponentsInUI()
         {
             await Task.Run(() =>
@@ -57,26 +51,7 @@ namespace JogoPalavraCerta.Formularios.FormulariosSetup.MainScreen
         {
             pontos.Invoke((MethodInvoker)(() =>
             {
-                try
-                {
-                    if (!File.Exists(tempFilePath))
-                    {
-                        using (var write = new StreamWriter(tempFilePath))
-                        {
-                            write.WriteLine("0");
-                        }
-                    }
-
-                    using (var read = new StreamReader(tempFilePath))
-                    {
-                        pontos.Text = "Pontos: " + read.ReadLine();
-                    }
-                }
-                catch (Exception)
-                {
-                    MessageBox.Show("Arquivo nao encontrado!");
-                    throw;
-                }
+                pontos.Text = PointsControl.Instance.ObterPontosArquivosDePontuacao();
             }));
         }
         private void InvokeComboBoxCategoria()

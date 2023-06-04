@@ -1,4 +1,5 @@
-﻿using System;
+﻿using JogoPalavraCerta.Database.PointsSetup;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -38,11 +39,20 @@ namespace JogoPalavraCerta.Formularios.FormulariosSetup.MatchSetup
             var builder = new StringBuilder(textoDaLabelPalavra);
             string palavra = PalavraDaPartida.Instance.PalavraAtual;
 
+            int qtdLetrasAcertadas = 0;
 
             for (int i = 0; i < palavra.Length; i++)
             {
-                if (letra == palavra[i]) builder[i] = letra;
+                if (letra == palavra[i]) 
+                {
+                    builder[i] = letra;
+                    qtdLetrasAcertadas++;
+                }
             }
+
+            //Dar pts para o jogador
+            PointsControl.Instance.GanharPontosPorLetra(qtdLetrasAcertadas);
+            LabelControl.Instance.AtualizarTextLblMatchPoints();
 
             textoDaLabelPalavra = builder.ToString();
 
@@ -65,6 +75,19 @@ namespace JogoPalavraCerta.Formularios.FormulariosSetup.MatchSetup
             }
 
             return stringFormatada;
+        }
+
+        public void VerificaSeAcertouAPalavra()
+        {
+            string palavra = PalavraDaPartida.Instance.PalavraAtual;
+
+            //Verificar se acertou a palavra
+            if (palavra == textoDaLabelPalavra)
+            {
+                MessageBox.Show("VITORIA!");
+                PointsControl.Instance.SalvarPontosNoArquivoDePontuacao();
+                //Jogar novamente?
+            }
         }
     }
 }
