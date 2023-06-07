@@ -2,6 +2,7 @@
 using JogoPalavraCerta.Database.TentativasSetup;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -37,5 +38,6 @@ namespace JogoPalavraCerta.Formularios.FormulariosSetup.MatchSetup
                 .ToString();
         }
 
+        private void ConsoleTesting() => Debug.WriteLine(lblMatchPoints.Text);
     }
 }
